@@ -1,4 +1,4 @@
-# Site Copy — Draft 1
+# Site Copy - Draft 1.1
 
 > Working draft of the full page narrative, top to bottom. Illustration
 > placeholders are marked with `[FIG]`. Section labels in brackets are
@@ -10,217 +10,219 @@
 
 # Hold something still.
 
-Every difficult problem gets simpler when you stop trying to change
-everything at once. **The Axial Method** is a way of working — for
-people, and now for AI agents — built on one old idea: choose what
-*won't* change, and the rest becomes workable.
+Difficult problems get simpler when we stop trying to change everything
+all at once. **The Axial Method** is a way of working, an old, familiar,
+and proven approach: at every stage, choose what _won't_ change, and what
+will.  This works with all kinds of problems, from baking cookies to
+building a house.  Saavy builders have used it for millennia, and now
+it has new relevance for AI agents.
 
 ---
 
 ## [The concept — steering wheel]
+### One axis at a time
 
-## One axis at a time
+A car could change direction any number of ways.  It could bend in the
+middle.  It could slither like a snake.  But instead, we build a rigid
+body and allow exactly one thing to move: the angle of the front wheels.
+That single constraint is what makes a car easy to understand, easy to
+design, easy to build and easy to use.
 
-A car could change direction any number of ways. It could bend in the
-middle. It could slither like a snake. Instead, we build a rigid body
-and let exactly one thing move: the angle of the front wheels. That
-single constraint — everything stays fixed except this — is what makes
-a car steerable, buildable, and understandable.
+That's the essence of an **axis**: a mode of work defined not only by
+its objectives, but also by its **invariants**.  The factors deliberately
+held still are the very ones that free you to work with precision
+along the one dimension that's open.
 
-That's an **axis**: a mode of work defined by its **invariants** — the
-things deliberately held still — which free you to move precisely along
-the one dimension that's open.
-
-The surprising part is that an axis is defined less by what you're
-doing than by what you're *refusing* to do. And you can feel the
-difference between a real invariant and a trivial one:
+It may seem surprising that an axis should be defined as much by what
+you're refusing to do as by what you're trying to accomplish.  You can
+sense the difference between a meaningful invariant and an arbitrary one:
 
 > **A real invariant is one you'll be tempted to break.**
-> Holding it still anyway is the discipline. If there's no temptation,
-> there's no axis — just a to-do list.
+> Holding it still requires discipline.  If there's no temptation,
+> it's not a real axis — just an arbitrary step in a to-do list.
 
-You already know this pattern. You've used it your whole life. Let me
-show you where.
+You already know this pattern.  You've used it your whole life.  Let's
+look at some common examples.
 
 ---
 
 ## [Example 1 — The kitchen: the problem, and the first axis]
 
-## 1. The kitchen
+### 1. The kitchen
 
-It's Saturday. You're baking cookies. The kitchen is a mess from last
-night, so you're loading the dishwasher between steps. Halfway into the
-dough you discover you're out of brown sugar, so now you're at the
-store with butter softening on a cluttered counter. Back home, the
-recipe says "add the dry ingredients" and you're measuring flour with
-one hand while the mixer runs.
+It's Saturday afternoon, and you've decided it's time to baking cookies.
+The kitchen is a mess since last night, so you're loading the dishwasher
+between steps.  Halfway into mixing the dry ingredients, you discover
+you're out of brown sugar.  Now youre at the grocery store, leaving the
+butter softening on a cluttered counter.  Back at home, the recipe says
+"blend the wet ingredients" but you've already cracked the eggs into the
+flour while the mixer runs.
 
-Nothing here is hard. And yet somehow it's chaos. The failure isn't in
-any single task — it's that every axis is moving at once.
+None of these tasks is difficult.  And yet somehow it's chaos.  The failure
+isn't in any single technique, it's that every axis is moving at once.
 
-Cooks solved this centuries ago and gave the solution a name:
-**mise en place**. Everything in its place *before* heat is applied.
-Read the whole recipe. Check every ingredient. Measure, chop, arrange.
-Only then, cook.
+Chefs solved this centuries ago; they call it **mise en place**.  Everything
+in its place _before_ mixing, before heat is applied.
+- Read the whole recipe.
+- Gather every ingredient.
+- Measure, chop, arrange.
 
-The invariant: **while you're prepping, the heat stays off.** You do
-not fire up the skillet and melt the butter while the onion is still
-unchopped — even though you'll be tempted to, because starting early
-feels faster, and that temptation is exactly the point. The discipline
-of the axis is refusing the tempting move.
+Then, and only then, cook.
 
-The kitchen is full of axes — prep, cook, plate, clean — and mise en
-place is the discipline for just one of them. How the axes fit
-*together* is its own craft. For that, we go to the workshop.
+Notice the invariants?  **While you're prepping, the heat stays off.**  You
+don't form the cookies before mixing in the chocolate chips, and you don't
+mix the chocolate chips into the dry ingredients.  As tempting as it may
+be to knock off as many tasks as quickly as possible, success depends on
+the discipline of respecting the invariants in each axis.
+
+The kitchen is full of axes: prepping, cooking, plating, cleaning...and
+mise enpace is the discipline for just one of them.  How the axes _fit
+together_ is its own craft.  To demonstrate that, let's go to the workshop.
 
 ---
 
-## [Example 2 — The workshop: axes in sequence]
+## [Example 2 -- The workshop: axes in sequence]
 
-## 2. The workshop
+### 2. The workshop
 
 `[FIG: 4-step CAD-style diagram sequence — rough board → datum face
 hatched → edge squared against face → board at final thickness. Each
 step labels the invariant surfaces as datums (A, B…) and shows one
 arrow of permitted motion.]`
 
-A woodworker starts with a rough, twisted board and needs it flat,
-square, and true. No single operation can do that. Instead, tradition
-prescribes a strict sequence:
+A woodworker starts with a rough, twisted board.  The design calls for
+it to be flat, square, and true.  There is no single operation that can
+accomplish all that at once.  Instead, tradition prescribes a time-honored
+sequence:
 
-**Flatten one face.** Just one. Ignore everything else about the board.
+**Flatten one face.** Just one.  Ignore all other surfaces.  If it wobbles,
+shim it so it's stable, then work until that one face is perfectly flat.
 
-**Square one edge** — by pressing that flat face against the fence.
-The face is now a *reference surface*: you work against it, and you
-don't touch it again.
+**Square one edge** — a clean straight code, as square as possible.  The
+flattened face in the previous step is now a *reference surface* that
+allows the board to light flat so we can get a clean cut on the edge.
 
 **Bring the board to thickness** — riding the flat face across the
-planer bed. Face and edge: both frozen now.
+planer bed.
 
 **Rip to width** — guided by the squared edge.
 
-Notice what happened. **The output of each axis became an invariant of
-the next.** The flat face isn't just a finished task — it's the fixed
-reference that makes the next operation possible at all. Engineers have
-notation for this: on a technical drawing, the held-still surface is
-marked as a *datum*, and every measurement is taken from it.
+Note how **the output of each axis became an invariant _and also a
+reference_ for the next.**  The first flat face isn't just a completed
+step, it's also the fixed reference that makes the next operatoin
+possible.  Engineers have notation for this: on a technical drawing, the
+invariant surface is marked as a _datum_, and every measurement is taken
+from that datum.
 
-The woodworker's tools enforce the same idea physically. A clamp exists
-to make something invariant. A drill press exists to permit motion
-along exactly one axis. The workshop is full of machines for holding
-things still — because holding things still is how precise work gets
-done.
+The woodworker's tools enforce the same idea physically.  A clamp exists
+to restrict motion of something otherwise moveable.  A drill press constrains
+drilling along a single axis.  Every workshop is full of machines for
+holding things or dimensions of things _still_.  We hold things still
+in order to do precise work.
 
-So: axes have invariants, and axes *compound* — each one's output
-stabilizing the ground for work done in other axes. Sometimes that's a
-direct sequence, as with the woodworker; often it's more like a graph,
-one result serving as a reference in several other axes at once. One
-more example, and you'll see why this matters more right now than it
-ever has.
+So: axes have invariants, and axes _compound_: each one's output
+stabilizes the ground for work done in other axes.  Sometimes that's a
+direct sequence, as with the woodworker; often it's more complex, with
+one result serving as a reference in several other axes at once, or a
+given invariant enforced in several different axes.
+
+Let's look at one more example, to demonstrate why this matters in the
+era of agentic AI.
 
 ---
 
 ## [Example 3 — The code: invariants make work verifiable]
 
-## 3. The code
+### 3. The code
 
-Software developers rediscovered this pattern and, like the cooks, gave
-it a name: **Red, Green, Refactor** — the cadence of test-driven
-development.
+Software developers also use this pattern, and like the chefs, they
+give names to their methods.  One of those is called **Red, Green, Refactor**,
+and it's the cadence of test-driven development.
 
-**Red:** write a failing test. The code is invariant — you don't fix
-anything yet, no matter how obvious the fix.
+**Red:** write a failing test.  Here the code is invariant — you might be
+tempted to fix the code, but don't do that yet, no matter how obvious the fix!
 
-**Green:** make the test pass. Now the *test* is invariant — and here
-is the tempting move the discipline forbids: when the test is
-inconvenient, you might want to change the test instead of the code.
-But you shouldn't.
+**Green:** now we make the test pass.  This is the fun part!  Note that now the
+_test_ is invariant: it might be tempting to change the test instead of the code
+but you shouldn't.  That's the discipline of this axis.
 
-**Refactor:** improve the code's structure. The tests stay green and
-untouched — they are the datum surface proving the code still does
-what it did.
+**Refactor:** think the last step was fun?  Now you get to improve the code's
+structure, design and coherence!  In this axis we keep the tests as invariant
+once again: they are the datum surface proving the code still functions as
+it should.
 
-And this example reveals the pattern's final property: **invariants
-make work verifiable.** "Did the refactoring break anything?" is
-unanswerable in a kitchen-chaos workflow where code and tests churn
-together. Hold the tests still, and the question answers itself. The
-thing you refuse to change is the thing that lets you *check* the
-thing you did change.
-
-Three domains, one shape:
-
-| | The discipline | The invariant | The tempting move it forbids |
-|---|---|---|---|
-| Kitchen | Mise en place | The heat — off until prep is done | "I'll just heat the skillet real quick" |
-| Workshop | Reference surfaces | The datum face | "One more pass on that face" |
-| Code | Red-Green-Refactor | The failing/passing test | "I'll just change the test and the code together" |
+This example reveals Axial Methodology's final property: **invariants
+make work _verifiable_.**  "Did the refactoring break anything?"  That
+question is unanswerable in a kitchen-chaos workflow where code and
+tests churn together.  By holding the tests still, we can definitively
+answer the question.  The invariant you refuse to mutate is the datum that
+lets you verify the part you did change.
 
 ---
 
 ## [The payoff — agents]
 
-## Why this matters now
+### Why this matters now
 
-We are handing real work to AI agents. And the hardest problem with
-agents isn't capability — it's *legibility*. An agent muddling every
-axis at once produces the same thing you produced in that kitchen:
-motion everywhere, and no way for anyone watching to reason about it.
-The human overseeing the work is stuck asking the worst questions:
-*What is it doing right now? What process is it even following?*
+Today we are handing off real work to AI agents.  The biggest problem with
+this isn't capability — it's _legibility_.  An agent muddling every
+axis at once produces the same kitchen-chaos we saw while baking cookies:
+motion everywhere, and no way for an observer to reason about it.  The
+human overseeing the work is left asking the worst kind of questions:
+_What's going on right now?  What process is it even following?_
 
-Give the agent axes, and everything changes:
+But give your agents axes, and everything improves:
 
-- **Each axis has declared invariants** — the agent working the
-  refactoring axis does not touch tests. The agent debugging does not
-  commit. These aren't vibes; they're constraints you can enforce.
-- **The work becomes observable.** The human no longer asks *what is
-  the agent doing* — they can see which axis is active, and ask the
-  good questions instead: *Is this a meaningful test? Do I agree with
-  this debugging approach?*
-- **The work becomes verifiable.** A narrow axis has narrow acceptable
-  outputs. Checking an agent's work stops being an open-ended audit
-  and becomes a bounded question: did it move only along the open
-  axis, and did it produce the required artifacts?
-- **Axes compound.** The output of the planning axis becomes an
-  invariant of the coding axis — and a reference for testing and review
-  besides. The structure itself — which axes, in what arrangement,
-  handing off what — becomes the process, visible to everyone.
+- **Each axis has declared invariants,** so the agent doing refactoring
+  does not touch tests.  The debugging agent does not commit their
+  experimental edits.  These aren't just vibes; they're constraints you
+  can enforce.
+- **The work becomes observable.**  The human no longer has to ask _what
+  is this agent doing?_  They can see which axis is active, and ask more
+  targeted questions instead: _Is this a meaningful test?  Do I agree
+  with this debugging approach?_
+- **The work becomes verifiable.**  A narrow axis has narrow acceptable
+  outputs.  When checking an agent's work, we move from open-ended audits
+  to bounded questions: were the invariants respected, and did it produce
+  the required artifacts?
+- **Axes compound.**  Artifacts from planning becomes invariants in the
+  coding axis, and a reference for testing and review besides.  The
+  structure itself --which axes, in what arrangement, with what handoffs
+  and invariants-- these become the process, easily visible and discoverable.
 
-This is not a new demand we're placing on machines. It's the oldest
-discipline of skilled work — the cook's mise en place, the
-woodworker's datum face, the developer's untouched test — finally
-written down clearly enough that we can hand it to an agent.
+This isn't a new style of work devised just for agents.  It's the oldest
+discipline in skilled work: the cook's mise en place, the woodworker's
+clamp, the engineer's datum face and the developer's untouched test, now
+re-expressed in a form that can be used to direct an agent.
 
-**Hold something still, and you can trust what moves.**
+**Hold part of a system still so you can work with the rest of it.**
 
 ---
 
 ## [CTA]
 
-## Put it to work
+### Put it to work
 
 I'm building an open set of axis definitions for agentic software
 development — skills, subagents, and hooks that give an agent axial
-discipline out of the box. *(Coming soon — watch this space, or the
-repo.)*
+discipline out of the box. *(Coming soon — watch [the repo](https://github.com/joelhelbling/axial-method).)
 
-If you're thinking about how your organization adopts agentic
-development without losing the ability to reason about the work — I'd
-love to talk. This is what I do.
+If you're thinking about how your organization adopts agentic development
+without losing the ability to understand the work — I'd love to talk!  This
+is what we do at [Test Double](https://testdouble.com), the awesome company where
+I work.
 
-`[Link: email / LinkedIn / GitHub]`
+`[Link: LinkedIn / GitHub]`
 
 ---
 
 ## [Bio]
 
-## About the author
+### About the author
 
-**Joel Helbling** has been building software for [N] years — Perl,
-Java, Ruby, JavaScript, and a stint as a DBA — and now works as an
-Engagement Partner at [Test Double](https://testdouble.com), where he
-helps teams do difficult software work well. He remains convinced that
-the main technological challenges recur over and over, no matter the
-current paradigm — which is more or less what this page is about.
+**Joel Helbling** has been building software for over 30 years; from Pascal
+and Perl, to Java, Ruby & JavaScript.  Today he works as an Engagement Partner
+at [Test Double](https://testdouble.com), where he helps teams solve today's
+technology problems without losing control of the future.
 
-`[FIG: photo, or a CAD-style portrait line drawing]`
+[FIG: photo, or a CAD-style portrait line drawing]
