@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Direction A — Vellum · The Axial Method</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --vellum: #FBFAF5;
+    --ink: #22262B;
+    --pencil-blue: #2D5FA8;
+    --pencil-blue-faint: rgba(45, 95, 168, 0.35);
+    --datum-red: #C2452D;
+    --grid-line: rgba(45, 95, 168, 0.07);
+    --grid-line-major: rgba(45, 95, 168, 0.13);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--vellum);
+    background-image:
+      linear-gradient(var(--grid-line-major) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line-major) 1px, transparent 1px),
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 96px 96px, 96px 96px, 12px 12px, 12px 12px;
+    color: var(--ink);
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: 19px;
+    line-height: 1.65;
+  }
+
+  .sheet {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ---------- annotation utility ---------- */
+  .anno {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--pencil-blue);
+  }
+
+  /* ---------- hero ---------- */
+  .hero {
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 64px;
+  }
+
+  .hero-meta {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--pencil-blue-faint);
+    padding-bottom: 10px;
+    margin-bottom: 72px;
+  }
+
+  /* dimension line above the headline */
+  .dim {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .dim-line {
+    flex: 1;
+    height: 1px;
+    background: var(--pencil-blue);
+    position: relative;
+  }
+  .dim-line::before, .dim-line::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 9px;
+    height: 1px;
+    background: var(--pencil-blue);
+  }
+  .dim-line::before { left: 0; transform: rotate(28deg) translateY(-2px); transform-origin: left center; }
+  .dim-line::after  { right: 0; transform: rotate(-28deg) translateY(-2px); transform-origin: right center; }
+  .dim-line.mirror::before { transform: rotate(-28deg) translateY(2px); }
+  .dim-line.mirror::after  { transform: rotate(28deg) translateY(2px); }
+
+  h1 {
+    font-family: "Archivo", sans-serif;
+    font-variation-settings: "wdth" 112;
+    font-weight: 800;
+    font-size: clamp(48px, 9vw, 96px);
+    line-height: 1.02;
+    letter-spacing: -0.015em;
+    margin-bottom: 14px;
+  }
+
+  /* the datum word */
+  .datum-word {
+    position: relative;
+    border-bottom: 3px solid var(--datum-red);
+  }
+  .datum-word::after {
+    content: "DATUM A — DO NOT MOVE";
+    position: absolute;
+    left: 50%;
+    bottom: -46px;
+    transform: translateX(-50%);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    white-space: nowrap;
+    color: var(--datum-red);
+    border: 1px solid var(--datum-red);
+    padding: 3px 8px;
+    background: var(--vellum);
+  }
+  .datum-word::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -24px;
+    width: 1px;
+    height: 22px;
+    background: var(--datum-red);
+  }
+
+  .hero-lede {
+    max-width: 620px;
+    margin-top: 88px;
+    font-size: 21px;
+    font-weight: 340;
+  }
+  .hero-lede strong { font-weight: 620; }
+
+  /* ---------- section ---------- */
+  .section {
+    padding: 110px 0 130px;
+    border-top: 1px solid var(--pencil-blue-faint);
+    position: relative;
+  }
+  .section-eyebrow {
+    position: absolute;
+    top: -9px;
+    left: 0;
+    background: var(--vellum);
+    padding-right: 14px;
+  }
+  h2 {
+    font-family: "Archivo", sans-serif;
+    font-variation-settings: "wdth" 108;
+    font-weight: 750;
+    font-size: clamp(30px, 4.5vw, 44px);
+    letter-spacing: -0.01em;
+    margin: 26px 0 34px;
+  }
+  .section p { max-width: 620px; margin-bottom: 26px; }
+  .section em { font-style: italic; }
+
+  blockquote {
+    max-width: 560px;
+    margin: 44px 0 44px 0;
+    padding: 26px 30px;
+    border: 1px solid var(--pencil-blue);
+    position: relative;
+  }
+  blockquote::before {
+    content: "NOTE 1.1";
+    position: absolute;
+    top: -8px;
+    left: 22px;
+    background: var(--vellum);
+    padding: 0 8px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    color: var(--pencil-blue);
+  }
+  blockquote strong {
+    display: block;
+    font-family: "Archivo", sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+  blockquote p { font-size: 17px; margin: 0; }
+
+  footer {
+    padding: 40px 0 60px;
+    border-top: 1px solid var(--pencil-blue-faint);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  @media (max-width: 640px) {
+    .hero-lede { margin-top: 72px; font-size: 19px; }
+    .datum-word::after { font-size: 9px; bottom: -42px; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .dim { animation: draw-in 0.9s ease-out both 0.2s; }
+    @keyframes draw-in { from { opacity: 0; transform: scaleX(0.6); } to { opacity: 1; transform: scaleX(1); } }
+  }
+</style>
+</head>
+<body>
+  <div class="sheet">
+
+    <section class="hero">
+      <div class="hero-meta">
+        <span class="anno">The Axial Method</span>
+        <span class="anno">Sheet 1 · Scale 1:1</span>
+      </div>
+
+      <div class="dim">
+        <span class="anno">Fixed</span>
+        <div class="dim-line"></div>
+        <span class="anno">Free</span>
+      </div>
+
+      <h1>Hold something<br><span class="datum-word">still</span>.</h1>
+
+      <p class="hero-lede">Difficult problems get simpler when we stop trying to change everything
+      all at once.  <strong>The Axial Method</strong> is a way of working, an old, familiar,
+      and proven approach: at every stage, choose what <em>won't</em> change, and what
+      will.  This works with all kinds of problems, from baking cookies to
+      building a house.  Savvy builders have used it for millennia, and now
+      it has new relevance for AI agents.</p>
+    </section>
+
+    <section class="section">
+      <span class="anno section-eyebrow">§1 · The concept</span>
+      <h2>One axis at a time</h2>
+
+      <p>A car could change direction any number of ways.  It could bend in the
+      middle.  It could slither like a snake.  But instead, we build a rigid
+      body and allow exactly one thing to move: the angle of the front wheels.
+      That single constraint is what makes a car easy to understand, easy to
+      design, easy to build and easy to use.</p>
+
+      <p>That's the essence of an <strong>axis</strong>: a mode of work defined not only by
+      its objectives, but also by its <strong>invariants</strong>.  The factors deliberately
+      held still are the very ones that free you to work with precision
+      along the one dimension that's open.</p>
+
+      <p>It may seem surprising that an axis should be defined as much by what
+      you're refusing to do as by what you're trying to accomplish.  You can
+      sense the difference between a meaningful invariant and an arbitrary one:</p>
+
+      <blockquote>
+        <strong>A real invariant is one you'll be tempted to break.</strong>
+        <p>Holding it still requires discipline.  If there's no temptation,
+        it's not a real axis — just an arbitrary step in a to-do list.</p>
+      </blockquote>
+
+      <p>You already know this pattern.  You've used it your whole life.  Let's
+      look at some common examples.</p>
+    </section>
+
+    <footer>
+      <span class="anno">Direction A — Vellum</span>
+      <span class="anno">Drawn by J. Helbling</span>
+    </footer>
+
+  </div>
+</body>
+</html>

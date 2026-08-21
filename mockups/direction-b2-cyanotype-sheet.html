@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Direction B2 — Cyanotype Sheet · The Axial Method</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,300..800&family=Public+Sans:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blueprint: #163A5C;
+    --blueprint-deep: #102E4B;
+    --line: #E9F2FA;
+    --line-faint: rgba(233, 242, 250, 0.4);
+    --line-ghost: rgba(233, 242, 250, 0.12);
+    --grid: rgba(233, 242, 250, 0.055);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--blueprint);
+    background-image:
+      radial-gradient(ellipse at 30% 20%, rgba(233,242,250,0.04), transparent 60%),
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: auto, 28px 28px, 28px 28px;
+    color: var(--line);
+    font-family: "Public Sans", sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.7;
+    padding: 26px;
+  }
+
+  /* the drawing-sheet frame */
+  .frame {
+    border: 1px solid var(--line);
+    outline: 1px solid var(--line-faint);
+    outline-offset: 5px;
+    position: relative;
+    max-width: 1060px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 90px);
+    background: rgba(16, 46, 75, 0.55);
+    box-shadow: 0 0 60px rgba(9, 26, 43, 0.35);
+  }
+
+  /* corner registration marks */
+  .reg {
+    position: absolute;
+    width: 18px; height: 18px;
+    pointer-events: none;
+  }
+  .reg::before, .reg::after {
+    content: ""; position: absolute; background: var(--line-faint);
+  }
+  .reg::before { left: 50%; top: 0; width: 1px; height: 100%; }
+  .reg::after  { top: 50%; left: 0; height: 1px; width: 100%; }
+  .reg.tl { top: 14px; left: 14px; }
+  .reg.tr { top: 14px; right: 14px; }
+  .reg.bl { bottom: 14px; left: 14px; }
+  .reg.br { bottom: 14px; right: 14px; }
+
+  .mono {
+    font-family: "Space Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--line-faint);
+  }
+
+  /* ---------- hero ---------- */
+  .hero {
+    min-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 0 60px;
+  }
+
+  h1 {
+    font-family: "Big Shoulders", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-size: clamp(64px, 14vw, 168px);
+    line-height: 0.92;
+    text-transform: uppercase;
+    letter-spacing: 0.005em;
+    margin: 26px 0 40px;
+  }
+  h1 .outline {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--line);
+  }
+
+  .hero-lede {
+    max-width: 560px;
+    font-size: 19px;
+  }
+  .hero-lede strong { font-weight: 600; }
+
+  /* ---------- section ---------- */
+  .section {
+    border-top: 1px solid var(--line-faint);
+    padding: 90px 0 110px;
+  }
+  .eyebrow-row {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    margin-bottom: 30px;
+  }
+  h2 {
+    font-family: "Big Shoulders", sans-serif;
+    font-weight: 600;
+    font-size: clamp(38px, 6vw, 64px);
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 30px;
+  }
+  .section p { max-width: 580px; margin-bottom: 24px; }
+
+  blockquote {
+    max-width: 540px;
+    margin: 46px 0;
+    padding-left: 28px;
+    border-left: 2px solid var(--line);
+  }
+  blockquote strong {
+    display: block;
+    font-family: "Big Shoulders", sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  blockquote p { font-size: 17px; margin: 0; color: rgba(233,242,250,0.85); }
+
+  /* ---------- title block ---------- */
+  .title-block {
+    border-top: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    font-family: "Space Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .title-block > div {
+    border-right: 1px solid var(--line-faint);
+    padding: 10px 14px 14px;
+  }
+  .title-block > div:last-child { border-right: none; }
+  .title-block .label {
+    display: block;
+    color: var(--line-faint);
+    font-size: 9px;
+    margin-bottom: 4px;
+  }
+  .title-block .value { color: var(--line); font-size: 12px; }
+
+  @media (max-width: 640px) {
+    body { padding: 12px; }
+    .title-block { grid-template-columns: 1fr 1fr; }
+    .title-block > div { border-top: 1px solid var(--line-ghost); }
+  }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <span class="reg tl"></span><span class="reg tr"></span>
+    <span class="reg bl"></span><span class="reg br"></span>
+
+    <section class="hero">
+      <span class="mono">Dwg No. AX-001 · The Axial Method</span>
+      <h1>Hold<br>something<br><span class="outline">still.</span></h1>
+      <p class="hero-lede">Difficult problems get simpler when we stop trying to change everything
+      all at once.  <strong>The Axial Method</strong> is a way of working, an old, familiar,
+      and proven approach: at every stage, choose what <em>won't</em> change, and what
+      will.  This works with all kinds of problems, from baking cookies to
+      building a house.  Savvy builders have used it for millennia, and now
+      it has new relevance for AI agents.</p>
+    </section>
+
+    <section class="section">
+      <div class="eyebrow-row">
+        <span class="mono">Detail 1 / Concept</span>
+      </div>
+      <h2>One axis at a time</h2>
+
+      <p>A car could change direction any number of ways.  It could bend in the
+      middle.  It could slither like a snake.  But instead, we build a rigid
+      body and allow exactly one thing to move: the angle of the front wheels.
+      That single constraint is what makes a car easy to understand, easy to
+      design, easy to build and easy to use.</p>
+
+      <p>That's the essence of an <strong>axis</strong>: a mode of work defined not only by
+      its objectives, but also by its <strong>invariants</strong>.  The factors deliberately
+      held still are the very ones that free you to work with precision
+      along the one dimension that's open.</p>
+
+      <p>It may seem surprising that an axis should be defined as much by what
+      you're refusing to do as by what you're trying to accomplish.  You can
+      sense the difference between a meaningful invariant and an arbitrary one:</p>
+
+      <blockquote>
+        <strong>A real invariant is one you'll be tempted to break.</strong>
+        <p>Holding it still requires discipline.  If there's no temptation,
+        it's not a real axis — just an arbitrary step in a to-do list.</p>
+      </blockquote>
+
+      <p>You already know this pattern.  You've used it your whole life.  Let's
+      look at some common examples.</p>
+    </section>
+
+    <div class="title-block">
+      <div><span class="label">Title</span><span class="value">The Axial Method</span></div>
+      <div><span class="label">Scale</span><span class="value">1 : 1</span></div>
+      <div><span class="label">Drawn by</span><span class="value">J. Helbling</span></div>
+      <div><span class="label">Sheet</span><span class="value">1 of 7</span></div>
+    </div>
+  </div>
+</body>
+</html>

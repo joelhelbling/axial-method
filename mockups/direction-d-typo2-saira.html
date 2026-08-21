@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Direction D · Type 2 — Saira · The Axial Method</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700&family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Martian+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --vellum: #FBFAF5;
+    --sheet: rgba(251, 250, 245, 0.84);
+    --ink: #22262B;
+    --pencil-blue: #2D5FA8;
+    --pencil-blue-faint: rgba(45, 95, 168, 0.35);
+    --datum-red: #C2452D;
+    --grid-line: rgba(45, 95, 168, 0.07);
+    --grid-line-major: rgba(45, 95, 168, 0.13);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--vellum);
+    background-image:
+      linear-gradient(var(--grid-line-major) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line-major) 1px, transparent 1px),
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 96px 96px, 96px 96px, 12px 12px, 12px 12px;
+    color: var(--ink);
+    font-family: "Spectral", Georgia, serif;
+    font-size: 18.5px;
+    line-height: 1.7;
+  }
+
+  .sheet {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 56px;
+    background: var(--sheet);
+    border-left: 1px solid var(--pencil-blue-faint);
+    border-right: 1px solid var(--pencil-blue-faint);
+    box-shadow: 0 0 40px rgba(34, 38, 43, 0.04);
+  }
+
+  .anno {
+    font-family: "Martian Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--pencil-blue);
+  }
+
+  /* ---------- hero ---------- */
+  .hero {
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 64px;
+  }
+
+  .hero-meta {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--pencil-blue-faint);
+    padding-bottom: 10px;
+    margin-bottom: 64px;
+  }
+
+  h1 {
+    font-family: "Saira Condensed", sans-serif;
+    font-weight: 700;
+    font-size: clamp(64px, 12.5vw, 144px);
+    line-height: 0.94;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+  }
+  h1 .outline {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--ink);
+  }
+
+  /* the datum word */
+  .datum-word {
+    position: relative;
+    border-bottom: 3px solid var(--datum-red);
+  }
+  .datum-word::after {
+    content: "DATUM A — DO NOT MOVE";
+    position: absolute;
+    left: 50%;
+    bottom: -44px;
+    transform: translateX(-50%);
+    font-family: "Martian Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    white-space: nowrap;
+    color: var(--datum-red);
+    border: 1px solid var(--datum-red);
+    padding: 3px 8px;
+    background: var(--vellum);
+  }
+  .datum-word::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -22px;
+    width: 1px;
+    height: 20px;
+    background: var(--datum-red);
+  }
+
+  .tagline {
+    margin-top: 34px;
+    font-size: 25px;
+    font-weight: 420;
+    font-style: italic;
+  }
+
+  .hero-lede {
+    max-width: 600px;
+    margin-top: 84px;
+    font-size: 21px;
+    font-weight: 340;
+  }
+  .hero-lede strong { font-weight: 620; }
+
+  /* ---------- section ---------- */
+  .section {
+    padding: 110px 0 130px;
+    border-top: 1px solid var(--pencil-blue-faint);
+    position: relative;
+  }
+  .section-eyebrow {
+    position: absolute;
+    top: -9px;
+    left: 0;
+    background: var(--vellum);
+    padding-right: 14px;
+  }
+  h2 {
+    font-family: "Saira Condensed", sans-serif;
+    font-weight: 600;
+    font-size: clamp(38px, 6vw, 60px);
+    text-transform: uppercase;
+    line-height: 1;
+    margin: 26px 0 34px;
+  }
+  .section p { max-width: 620px; margin-bottom: 26px; }
+
+  blockquote {
+    max-width: 560px;
+    margin: 46px 0;
+    padding: 26px 30px;
+    border: 1px solid var(--pencil-blue);
+    position: relative;
+  }
+  blockquote::before {
+    content: "NOTE 1.1";
+    position: absolute;
+    top: -8px;
+    left: 22px;
+    background: var(--vellum);
+    padding: 0 8px;
+    font-family: "Martian Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: var(--pencil-blue);
+  }
+  blockquote strong {
+    display: block;
+    font-family: "Saira Condensed", sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  blockquote p { font-size: 17px; margin: 0; }
+
+  /* ---------- title block (from B) ---------- */
+  .title-block {
+    border-top: 1px solid var(--ink);
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    font-family: "Martian Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 56px;
+  }
+  .title-block > div {
+    border-right: 1px solid var(--pencil-blue-faint);
+    border-bottom: 1px solid var(--pencil-blue-faint);
+    padding: 10px 14px 14px;
+  }
+  .title-block > div:first-child { border-left: 1px solid var(--pencil-blue-faint); }
+  .title-block .label {
+    display: block;
+    color: var(--pencil-blue);
+    font-size: 9px;
+    margin-bottom: 4px;
+  }
+  .title-block .value { color: var(--ink); font-size: 12px; }
+
+  @media (max-width: 640px) {
+    .sheet { padding: 0 24px; }
+    .hero-lede { margin-top: 76px; font-size: 19px; }
+    .datum-word::after { font-size: 9px; bottom: -40px; }
+    .title-block { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+  <div class="sheet">
+
+    <section class="hero">
+      <div class="hero-meta">
+        <span class="anno">Dwg No. AX-001</span>
+        <span class="anno">Sheet 1 · Scale 1:1</span>
+      </div>
+
+      <h1>The<br><span class="outline">Axial</span><br>Method</h1>
+
+      <p class="tagline">Hold something <span class="datum-word">still</span>.</p>
+
+      <p class="hero-lede">Difficult problems get simpler when we stop trying to change everything
+      all at once.  <strong>The Axial Method</strong> is a way of working, an old, familiar,
+      and proven approach: at every stage, choose what <em>won't</em> change, and what
+      will.  This works with all kinds of problems, from baking cookies to
+      building a house.  Savvy builders have used it for millennia, and now
+      it has new relevance for AI agents.</p>
+    </section>
+
+    <section class="section">
+      <span class="anno section-eyebrow">Detail 1 / Concept</span>
+      <h2>One axis at a time</h2>
+
+      <p>A car could change direction any number of ways.  It could bend in the
+      middle.  It could slither like a snake.  But instead, we build a rigid
+      body and allow exactly one thing to move: the angle of the front wheels.
+      That single constraint is what makes a car easy to understand, easy to
+      design, easy to build and easy to use.</p>
+
+      <p>That's the essence of an <strong>axis</strong>: a mode of work defined not only by
+      its objectives, but also by its <strong>invariants</strong>.  The factors deliberately
+      held still are the very ones that free you to work with precision
+      along the one dimension that's open.</p>
+
+      <p>It may seem surprising that an axis should be defined as much by what
+      you're refusing to do as by what you're trying to accomplish.  You can
+      sense the difference between a meaningful invariant and an arbitrary one:</p>
+
+      <blockquote>
+        <strong>A real invariant is one you'll be tempted to break.</strong>
+        <p>Holding it still requires discipline.  If there's no temptation,
+        it's not a real axis — just an arbitrary step in a to-do list.</p>
+      </blockquote>
+
+      <p>You already know this pattern.  You've used it your whole life.  Let's
+      look at some common examples.</p>
+    </section>
+
+    <div class="title-block">
+      <div><span class="label">Title</span><span class="value">The Axial Method</span></div>
+      <div><span class="label">Scale</span><span class="value">1 : 1</span></div>
+      <div><span class="label">Drawn by</span><span class="value">J. Helbling</span></div>
+      <div><span class="label">Sheet</span><span class="value">1 of 7</span></div>
+    </div>
+
+  </div>
+</body>
+</html>

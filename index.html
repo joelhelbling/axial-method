@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Axial Method — Hold something still, and the work becomes simple.</title>
+<meta name="description" content="The Axial Method: a way of working, for people and AI agents, built on choosing what won't change. Hold something still, and the work becomes simple.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Michroma&family=Public+Sans:ital,wght@0,300;0,400;0,600;1,300;1,400&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --vellum: #FBFAF5;
+    --sheet: rgba(251, 250, 245, 0.84);
+    --ink: #22262B;
+    --pencil-blue: #2D5FA8;
+    --pencil-blue-faint: rgba(45, 95, 168, 0.35);
+    --datum-red: #C2452D;
+    --grid-line: rgba(45, 95, 168, 0.07);
+    --grid-line-major: rgba(45, 95, 168, 0.13);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--vellum);
+    background-image:
+      linear-gradient(var(--grid-line-major) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line-major) 1px, transparent 1px),
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 96px 96px, 96px 96px, 12px 12px, 12px 12px;
+    color: var(--ink);
+    font-family: "Public Sans", sans-serif;
+    font-weight: 300;
+    font-size: 17.5px;
+    line-height: 1.7;
+  }
+
+  .sheet {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 56px;
+    background: var(--sheet);
+    border-left: 1px solid var(--pencil-blue-faint);
+    border-right: 1px solid var(--pencil-blue-faint);
+    box-shadow: 0 0 40px rgba(34, 38, 43, 0.04);
+  }
+
+  .anno {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--pencil-blue);
+  }
+
+  strong { font-weight: 600; }
+  a { color: var(--pencil-blue); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:hover { color: var(--datum-red); }
+  a:focus-visible, .skip:focus-visible {
+    outline: 2px solid var(--datum-red);
+    outline-offset: 2px;
+  }
+
+  /* ---------- hero ---------- */
+  .hero {
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 64px 0 110px;
+  }
+
+  .hero-meta {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--pencil-blue-faint);
+    padding-bottom: 10px;
+    margin-bottom: 64px;
+  }
+
+  h1 {
+    font-family: "Michroma", sans-serif;
+    font-weight: 400;
+    font-size: clamp(36px, 6.5vw, 76px);
+    line-height: 1.14;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  h1 .outline {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--ink);
+  }
+
+  .tagline {
+    margin-top: 34px;
+    font-size: 23px;
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  /* the datum word */
+  .datum-word {
+    position: relative;
+    border-bottom: 3px solid var(--datum-red);
+  }
+  .datum-word::after {
+    content: "DATUM A — DO NOT MOVE";
+    position: absolute;
+    left: 50%;
+    bottom: -44px;
+    transform: translateX(-50%);
+    font-family: "IBM Plex Mono", monospace;
+    font-style: normal;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    white-space: nowrap;
+    color: var(--datum-red);
+    border: 1px solid var(--datum-red);
+    padding: 3px 8px;
+    background: var(--vellum);
+  }
+  .datum-word::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -22px;
+    width: 1px;
+    height: 20px;
+    background: var(--datum-red);
+  }
+
+  .hero-lede {
+    max-width: 600px;
+    margin-top: 84px;
+    font-size: 19px;
+  }
+
+  /* ---------- sections ---------- */
+  .section {
+    padding: 50px 0 110px;
+    border-top: 1px solid var(--pencil-blue-faint);
+    position: relative;
+  }
+  .section-eyebrow {
+    position: absolute;
+    top: -9px;
+    left: 0;
+    background: var(--vellum);
+    padding-right: 14px;
+  }
+  h2 {
+    font-family: "Michroma", sans-serif;
+    font-weight: 400;
+    font-size: clamp(22px, 3.2vw, 34px);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    margin: 26px 0 34px;
+  }
+  h3 {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--pencil-blue);
+    margin: 44px 0 16px;
+  }
+  .section p { max-width: 620px; margin-bottom: 26px; }
+  .section ul { max-width: 620px; margin: 0 0 26px 24px; }
+  .section li { margin-bottom: 10px; }
+  .section li::marker { color: var(--pencil-blue); }
+
+  .step { max-width: 620px; margin-bottom: 22px; }
+  .step strong { font-weight: 600; }
+
+  blockquote {
+    max-width: 560px;
+    margin: 46px 0;
+    padding: 26px 30px;
+    border: 1px solid var(--pencil-blue);
+    position: relative;
+  }
+  blockquote::before {
+    content: "NOTE " attr(data-note);
+    position: absolute;
+    top: -8px;
+    left: 22px;
+    background: var(--vellum);
+    padding: 0 8px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: var(--pencil-blue);
+  }
+  blockquote strong {
+    display: block;
+    font-family: "Michroma", sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1.4;
+    margin-bottom: 12px;
+  }
+  blockquote p { font-size: 16.5px; margin: 0; }
+
+  /* ---------- registered prints (photos) ---------- */
+  .photo-pair {
+    display: flex;
+    gap: 44px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin: 48px 0;
+  }
+  .rp {
+    display: inline-block;
+    position: relative;
+    background: #fff;
+    padding: 10px;
+    margin: 0;
+    box-shadow: 0 4px 14px rgba(34, 38, 43, 0.13);
+  }
+  .rp img {
+    display: block;
+    object-fit: cover;
+    object-position: var(--pos, 50% 50%);
+  }
+  .rp .rp-caption {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--pencil-blue);
+    margin-top: 10px;
+  }
+  .rp .c {
+    position: absolute;
+    width: 0; height: 0;
+    border-style: solid;
+  }
+  .rp .c.tl { top: -2px; left: -2px; border-width: 16px 16px 0 0; border-color: var(--pencil-blue) transparent transparent transparent; }
+  .rp .c.tr { top: -2px; right: -2px; border-width: 0 16px 16px 0; border-color: transparent var(--pencil-blue) transparent transparent; }
+  .rp .c.bl { bottom: -2px; left: -2px; border-width: 16px 0 0 16px; border-color: transparent transparent transparent var(--pencil-blue); }
+  .rp .c.br { bottom: -2px; right: -2px; border-width: 0 0 16px 16px; border-color: transparent transparent var(--pencil-blue) transparent; }
+
+  .rp.p45 img { width: 280px; aspect-ratio: 4 / 5; }
+  .rp.p12 img { width: 250px; }
+  .rp.banner {
+    display: block;
+    margin: 24px 0 56px;
+  }
+  .rp.banner img { width: 100%; }
+  .rp.hero-plate { margin: 0 0 72px; }
+  .rp.wide { display: block; margin: 48px 0; }
+  .rp.wide img { width: 100%; }
+  .rp.l32 { margin: 48px 0; }
+  .rp.l32 img { width: 100%; max-width: 640px; aspect-ratio: 3 / 2; }
+  .rp.float-r {
+    float: right;
+    margin: 6px 0 28px 44px;
+  }
+
+  @media (max-width: 700px) {
+    .rp.float-r { float: none; margin: 36px 0; }
+    .rp.p45 img { width: 100%; max-width: 340px; }
+  }
+
+  /* ---------- inline cycle figure ---------- */
+  .fig-cycle {
+    float: left;
+    width: 190px;
+    margin: 8px 42px 18px 0;
+  }
+  .fig-cycle svg { width: 100%; height: auto; display: block; }
+  .fig-cycle figcaption {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--pencil-blue);
+    margin-top: 4px;
+    text-align: center;
+  }
+  @media (max-width: 700px) {
+    .fig-cycle { float: none; margin: 36px auto; }
+  }
+
+  /* ---------- figure ---------- */
+  figure {
+    margin: 54px 0;
+    max-width: 720px;
+  }
+  figure svg { width: 100%; height: auto; display: block; }
+  figcaption {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--pencil-blue);
+    margin-top: 14px;
+  }
+
+  /* ---------- payoff list ---------- */
+  .payoff-list { list-style: none; margin-left: 0 !important; }
+  .payoff-list li {
+    padding-left: 26px;
+    position: relative;
+    margin-bottom: 18px;
+  }
+  .payoff-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 11px;
+    width: 14px;
+    height: 1px;
+    background: var(--datum-red);
+  }
+
+  .closing {
+    font-family: "Michroma", sans-serif;
+    font-size: clamp(17px, 2.4vw, 24px);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+    max-width: 640px;
+    margin: 54px 0 0;
+  }
+
+  /* ---------- bio ---------- */
+  .bio-grid {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    max-width: 720px;
+  }
+  .rp.bio { flex-shrink: 0; }
+  .rp.bio img { width: 200px; aspect-ratio: 4 / 5; }
+
+  /* ---------- title block ---------- */
+  .title-block {
+    border-top: 1px solid var(--ink);
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 90px 0 56px;
+  }
+  .title-block > div {
+    border-right: 1px solid var(--pencil-blue-faint);
+    border-bottom: 1px solid var(--pencil-blue-faint);
+    padding: 10px 14px 14px;
+  }
+  .title-block > div:first-child { border-left: 1px solid var(--pencil-blue-faint); }
+  .title-block .label {
+    display: block;
+    color: var(--pencil-blue);
+    font-size: 9px;
+    margin-bottom: 4px;
+  }
+  .title-block .value { color: var(--ink); font-size: 12px; }
+
+  @media (max-width: 700px) {
+    .sheet { padding: 0 24px; }
+    .hero-lede { margin-top: 76px; font-size: 17.5px; }
+    .datum-word::after { font-size: 9px; bottom: -40px; }
+    .title-block { grid-template-columns: 1fr 1fr; }
+    .bio-grid { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+  <div class="sheet">
+
+    <!-- ================= HERO ================= -->
+    <header class="hero">
+      <figure class="rp banner hero-plate">
+        <span class="c tl"></span><span class="c tr"></span><span class="c bl"></span><span class="c br"></span>
+        <img src="images/maxim-tolchinskiy-Oz5hzB-d7G0-unsplash-cropped.png"
+             alt="Close view of hands turning a wooden spindle on a lathe, chisel resting on the tool rest, shavings in the air">
+        <figcaption class="rp-caption">Ref 0.1 — The lathe · single axis motion</figcaption>
+      </figure>
+
+      <div class="hero-meta">
+        <span class="anno">Dwg No. AX-001</span>
+        <span class="anno">Sheet 1 · Scale 1:1</span>
+      </div>
+
+      <h1>The<br><span class="outline">Axial</span><br>Method</h1>
+
+      <p class="tagline">Hold something <span class="datum-word">still</span>, and the work becomes simple.</p>
+
+      <p class="hero-lede">Difficult problems get simpler when we stop trying to change everything
+      all at once.  <strong>The Axial Method</strong> is a way of working, an old, familiar,
+      and proven approach: at every stage, choose what <em>won't</em> change, and what
+      will.  This works with all kinds of problems, from baking cookies to
+      building a house.  Savvy builders have used it for millennia, and now
+      it has new relevance for AI agents.</p>
+    </header>
+
+    <!-- ================= CONCEPT ================= -->
+    <section class="section">
+      <span class="anno section-eyebrow">Detail 1 / Concept</span>
+      <h2>One axis at a time</h2>
+
+      <p>A car could change direction any number of ways.  It could bend in the
+      middle.  It could slither like a snake.  But instead, we build a rigid
+      body and allow exactly one thing to move: the angle of the front wheels.
+      That single constraint is what makes a car easy to understand, easy to
+      design, easy to build and easy to use.</p>
+
+      <figure class="rp wide">
+        <span class="c tl"></span><span class="c tr"></span><span class="c bl"></span><span class="c br"></span>
+        <img src="images/bending-car.jpeg"
+             alt="Engineering sketch of a rejected vehicle concept: a van that bends in the middle, with articulated joints, accordion sections, all-wheel drive, and flexible steering">
+        <figcaption class="rp-caption">Ref 1.1 — Vehicle Concept · unweildy</figcaption>
+      </figure>
+
+      <p>That's the essence of an <strong>axis</strong>: a mode of work defined not only by
+      its objectives, but also by its <strong>invariants</strong>.  The factors deliberately
+      held still are the very ones that free you to work with precision
+      along the one dimension that's open.</p>
+
+      <p>It may seem surprising that an axis should be defined as much by what
+      you're refusing to do as by what you're trying to accomplish.  You can
+      sense the difference between a meaningful invariant and an arbitrary one:</p>
+
+      <blockquote data-note="1.1">
+        <strong>A real invariant is one you'll be tempted to break.</strong>
+        <p>Holding it still requires discipline.  If there's no temptation,
+        it's not a real axis — just an arbitrary step in a to-do list.</p>
+      </blockquote>
+
+      <p>You already know this pattern.  You've used it your whole life.  Let's
+      look at some common examples.</p>
+    </section>
+
+    <!-- ================= KITCHEN ================= -->
+    <section class="section">
+      <span class="anno section-eyebrow">Detail 2 / The Kitchen</span>
+
+      <figure class="rp banner">
+        <span class="c tl"></span><span class="c tr"></span><span class="c bl"></span><span class="c br"></span>
+        <img src="images/pexels-tanner-barrott-506845-8456734-rotated-cropped.png"
+             alt="Overhead view of cookie ingredients measured and arranged: flour, butter, brown sugar, chocolate chips, eggs">
+        <figcaption class="rp-caption">Ref 2.1 — Mise en place</figcaption>
+      </figure>
+
+      <h2>The Kitchen</h2>
+
+      <p>It's Saturday afternoon, and you've decided it's time to bake some cookies.
+      The kitchen is a mess since last night, so you're loading the dishwasher
+      between steps.  Halfway into mixing the dry ingredients, you discover
+      you're out of brown sugar.  Now you're at the grocery store, leaving the
+      butter softening on a cluttered counter.  Back at home, the recipe says
+      "blend the wet ingredients" but you've already cracked the eggs into the
+      flour while the mixer runs.</p>
+
+      <p>None of these tasks is difficult.  And yet somehow it's chaos.  The failure
+      isn't in any single technique, it's that every axis is moving at once.</p>
+
+      <p>Chefs solved this centuries ago; they call it <strong>mise en place</strong>.  Everything
+      in its place <em>before</em> mixing, before heat is applied.</p>
+      <ul>
+        <li>Read the whole recipe.</li>
+        <li>Gather every ingredient.</li>
+        <li>Measure, chop, arrange.</li>
+      </ul>
+      <p>Then, and only then, cook.</p>
+
+      <figure class="rp wide">
+        <span class="c tl"></span><span class="c tr"></span><span class="c bl"></span><span class="c br"></span>
+        <img src="images/pexels-lauren-diaz-768597919-19130312-rotated-cropped.png"
+             alt="Formed cookie dough on a parchment-lined baking sheet beside the mixing bowl">
+        <figcaption class="rp-caption">Ref 2.2 — Prep complete</figcaption>
+      </figure>
+
+      <p>Notice the invariants?  <strong>While you're prepping, the heat stays off.</strong>  You
+      don't form the cookies before mixing in the chocolate chips, and you don't
+      mix the chocolate chips into the dry ingredients.  As tempting as it may
+      be to knock off as many tasks as quickly as possible, success depends on
+      the discipline of respecting the invariants in each axis.</p>
+
+      <p>The kitchen is full of axes: prepping, cooking, plating, cleaning...and
+      mise en place is the discipline for just one of them.  How the axes <em>fit
+      together</em> is its own craft.  To demonstrate that, let's go to the workshop.</p>
+    </section>
+
+    <!-- ================= WORKSHOP ================= -->
+    <section class="section">
+      <span class="anno section-eyebrow">Detail 3 / The Workshop</span>
+
+      <figure class="rp banner">
+        <span class="c tl"></span><span class="c tr"></span><span class="c bl"></span><span class="c br"></span>
+        <img src="images/pexels-tima-miroshnichenko-6790029-cropped.png"
+             alt="Woodworker ripping a board on a table saw, the workpiece held against the fence">
+        <figcaption class="rp-caption">Ref 3.1 — Rip to width · guided by the fence</figcaption>
+      </figure>
+
+      <h2>The Workshop</h2>
+
+      <figure>
+        <svg viewBox="0 0 720 240" role="img" aria-label="Four-step diagram of squaring a rough board: flatten one face, square one edge, thickness, rip to width. Each step marks the invariant surfaces as datums.">
+          <defs>
+            <pattern id="hatch" width="6" height="6" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+              <line x1="0" y1="0" x2="0" y2="6" stroke="#C2452D" stroke-width="1"/>
+            </pattern>
+          </defs>
+          <g font-family="'IBM Plex Mono', monospace" font-size="9" letter-spacing="0.08em">
+            <!-- STEP 1: rough board, flatten bottom face -->
+            <g transform="translate(10,20)">
+              <text x="0" y="0" fill="#2D5FA8">STEP 1</text>
+              <text x="0" y="14" fill="#22262B">FLATTEN FACE</text>
+              <!-- rough board profile: wavy top, flat bottom -->
+              <path d="M10 110 Q 30 96 55 104 T 105 98 T 150 104 L 150 150 L 10 150 Z"
+                    fill="none" stroke="#22262B" stroke-width="1.5"/>
+              <!-- datum face hatch -->
+              <rect x="10" y="150" width="140" height="7" fill="url(#hatch)" stroke="none"/>
+              <line x1="10" y1="150" x2="150" y2="150" stroke="#C2452D" stroke-width="2"/>
+              <text x="10" y="176" fill="#C2452D">DATUM A</text>
+            </g>
+            <!-- STEP 2: square one edge -->
+            <g transform="translate(190,20)">
+              <text x="0" y="0" fill="#2D5FA8">STEP 2</text>
+              <text x="0" y="14" fill="#22262B">SQUARE EDGE</text>
+              <path d="M10 104 Q 40 94 80 100 T 150 102 L 150 150 L 10 150 Z"
+                    fill="none" stroke="#22262B" stroke-width="1.5"/>
+              <rect x="10" y="150" width="140" height="7" fill="url(#hatch)" stroke="none"/>
+              <line x1="10" y1="150" x2="150" y2="150" stroke="#C2452D" stroke-width="2"/>
+              <!-- squared left edge -->
+              <line x1="10" y1="104" x2="10" y2="150" stroke="#C2452D" stroke-width="2"/>
+              <rect x="3" y="104" width="7" height="46" fill="url(#hatch)" stroke="none"/>
+              <text x="10" y="176" fill="#C2452D">DATUM A + B</text>
+              <!-- square symbol -->
+              <path d="M10 150 l 10 0 l 0 -10" fill="none" stroke="#2D5FA8" stroke-width="1"/>
+            </g>
+            <!-- STEP 3: thickness -->
+            <g transform="translate(370,20)">
+              <text x="0" y="0" fill="#2D5FA8">STEP 3</text>
+              <text x="0" y="14" fill="#22262B">THICKNESS</text>
+              <rect x="10" y="108" width="140" height="42" fill="none" stroke="#22262B" stroke-width="1.5"/>
+              <rect x="10" y="150" width="140" height="7" fill="url(#hatch)" stroke="none"/>
+              <line x1="10" y1="150" x2="150" y2="150" stroke="#C2452D" stroke-width="2"/>
+              <line x1="10" y1="108" x2="10" y2="150" stroke="#C2452D" stroke-width="2"/>
+              <!-- cutter arrow -->
+              <line x1="80" y1="70" x2="80" y2="98" stroke="#2D5FA8" stroke-width="1"/>
+              <path d="M76 92 L 80 100 L 84 92 Z" fill="#2D5FA8"/>
+              <!-- dimension t -->
+              <line x1="162" y1="108" x2="162" y2="150" stroke="#2D5FA8" stroke-width="1"/>
+              <line x1="157" y1="108" x2="167" y2="108" stroke="#2D5FA8" stroke-width="1"/>
+              <line x1="157" y1="150" x2="167" y2="150" stroke="#2D5FA8" stroke-width="1"/>
+              <text x="158" y="134" fill="#2D5FA8">t</text>
+            </g>
+            <!-- STEP 4: rip to width -->
+            <g transform="translate(550,20)">
+              <text x="0" y="0" fill="#2D5FA8">STEP 4</text>
+              <text x="0" y="14" fill="#22262B">RIP TO WIDTH</text>
+              <rect x="10" y="108" width="120" height="42" fill="none" stroke="#22262B" stroke-width="1.5"/>
+              <rect x="10" y="150" width="120" height="7" fill="url(#hatch)" stroke="none"/>
+              <line x1="10" y1="150" x2="130" y2="150" stroke="#C2452D" stroke-width="2"/>
+              <line x1="10" y1="108" x2="10" y2="150" stroke="#C2452D" stroke-width="2"/>
+              <!-- rip line -->
+              <line x1="130" y1="100" x2="130" y2="158" stroke="#2D5FA8" stroke-width="1" stroke-dasharray="4 3"/>
+              <!-- dimension w -->
+              <line x1="10" y1="92" x2="130" y2="92" stroke="#2D5FA8" stroke-width="1"/>
+              <line x1="10" y1="87" x2="10" y2="97" stroke="#2D5FA8" stroke-width="1"/>
+              <line x1="130" y1="87" x2="130" y2="97" stroke="#2D5FA8" stroke-width="1"/>
+              <text x="64" y="86" fill="#2D5FA8">w</text>
+              <text x="10" y="176" fill="#C2452D">FROM DATUMS</text>
+            </g>
+          </g>
+        </svg>
+        <figcaption>Fig. 1 — Stock preparation: each face, once true, becomes the datum for the next operation.</figcaption>
+      </figure>
+
+      <figure class="rp p12 float-r">
+        <span class="c tl"></span><span class="c tr"></span><span class="c bl"></span><span class="c br"></span>
+        <img src="images/pexels-cottonbro-5089144-cropped.png"
+             alt="Woodworker pushing a board across a jointer to flatten its face">
+        <figcaption class="rp-caption">Ref 3.2 — Establishing a datum</figcaption>
+      </figure>
+
+      <p>A woodworker starts with a rough, twisted board.  The design calls for
+      it to be flat, square, and true.  There is no single operation that can
+      accomplish all that at once.  Instead, tradition prescribes a time-honored
+      sequence:</p>
+
+      <p class="step"><strong>Flatten one face.</strong> Just one.  Ignore all other surfaces.  If it wobbles,
+      shim it so it's stable, then work until that one face is perfectly flat.</p>
+
+      <p class="step"><strong>Square one edge</strong> — a clean straight cut, as square as possible.  The
+      flattened face in the previous step is now a <em>reference surface</em> that
+      allows the board to lie flat so we can get a clean cut on the edge.</p>
+
+      <p class="step"><strong>Bring the board to thickness</strong> — riding the flat face across the
+      planer bed.</p>
+
+      <p class="step"><strong>Rip to width</strong> — guided by the squared edge.</p>
+
+      <p>Note how <strong>the output of each axis became an invariant <em>and also a
+      reference</em> for the next.</strong>  The first flat face isn't just a completed
+      step, it's also the fixed reference that makes the next operation
+      possible.  Engineers have notation for this: on a technical drawing, the
+      invariant surface is marked as a <em>datum</em>, and every measurement is taken
+      from that datum.</p>
+
+      <p>The woodworker's tools enforce the same idea physically.  A clamp exists
+      to restrict motion of something otherwise moveable.  A drill press constrains
+      drilling along a single axis.  Every workshop is full of machines for
+      holding things or dimensions of things <em>still</em>.  We hold things still
+      in order to do precise work.</p>
+
+      <div class="photo-pair">
+        <figure class="rp p45">
+          <span class="c tl"></span><span class="c tr"></span><span class="c bl"></span><span class="c br"></span>
+          <img src="images/pexels-tima-miroshnichenko-6790088.jpg" style="--pos: 50% 35%"
+               alt="Woodworker hand-planing a board held to the workbench by a clamp">
+          <figcaption class="rp-caption">Ref 3.3 — Clamped · 0.00 mm movement</figcaption>
+        </figure>
+      </div>
+
+      <p>So: axes have invariants, and axes <em>compound</em>: each one's output
+      stabilizes the ground for work done in other axes.  Sometimes that's a
+      direct sequence, as with the woodworker; often it's more complex, with
+      one result serving as a reference in several other axes at once, or a
+      given invariant enforced in several different axes.</p>
+
+      <p>Let's look at one more example, to demonstrate why this matters in the
+      era of agentic AI.</p>
+    </section>
+
+    <!-- ================= CODE ================= -->
+    <section class="section">
+      <span class="anno section-eyebrow">Detail 4 / The Codebase</span>
+
+      <figure class="rp banner">
+        <span class="c tl"></span><span class="c tr"></span><span class="c bl"></span><span class="c br"></span>
+        <img src="images/coding-red-green-refactor-cropped.png"
+             alt="Laptop showing code in an editor on a wooden desk, beside a latte and a plate of red and green frosted cookies">
+        <figcaption class="rp-caption">Ref 4.1 — Red, green, and a batch from the kitchen</figcaption>
+      </figure>
+
+      <h2>The Codebase</h2>
+
+      <p>Software developers also use this pattern, and like the chefs, they
+      give names to their methods.  One of those is called <strong>Red, Green, Refactor</strong>,
+      and it's the cadence of test-driven development.</p>
+
+      <figure class="fig-cycle">
+        <svg viewBox="0 0 210 230" role="img" aria-label="Circular diagram of the test-driven development cadence: a red arc, a green arc, and a blue arc chase one another clockwise, labeled Red, Green, Refactor.">
+          <defs>
+            <marker id="ah-red" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+              <path d="M0 0 L10 5 L0 10 Z" fill="#C2452D"/>
+            </marker>
+            <marker id="ah-green" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+              <path d="M0 0 L10 5 L0 10 Z" fill="#4E8455"/>
+            </marker>
+            <marker id="ah-blue" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+              <path d="M0 0 L10 5 L0 10 Z" fill="#2D5FA8"/>
+            </marker>
+          </defs>
+          <!-- faint construction circle -->
+          <circle cx="95" cy="105" r="62" fill="none" stroke="rgba(45, 95, 168, 0.15)" stroke-width="1" stroke-dasharray="3 5"/>
+          <!-- center crosshair -->
+          <line x1="90" y1="105" x2="100" y2="105" stroke="rgba(45, 95, 168, 0.4)" stroke-width="1"/>
+          <line x1="95" y1="100" x2="95" y2="110" stroke="rgba(45, 95, 168, 0.4)" stroke-width="1"/>
+          <!-- red arc: fail -->
+          <path d="M 84.2 43.9 A 62 62 0 0 1 153.3 83.8" fill="none" stroke="#C2452D" stroke-width="3" marker-end="url(#ah-red)"/>
+          <!-- green arc: pass -->
+          <path d="M 153.3 126.2 A 62 62 0 0 1 84.2 166.1" fill="none" stroke="#4E8455" stroke-width="3" marker-end="url(#ah-green)"/>
+          <!-- blue arc: refactor -->
+          <path d="M 47.5 144.9 A 62 62 0 0 1 47.5 65.1" fill="none" stroke="#2D5FA8" stroke-width="3" marker-end="url(#ah-blue)"/>
+          <!-- center labels -->
+          <g font-family="'IBM Plex Mono', monospace" font-size="10" letter-spacing="0.08em" text-anchor="middle">
+            <text x="95" y="86" fill="#C2452D">RED</text>
+            <text x="95" y="102" fill="#4E8455">GREEN</text>
+            <text x="95" y="118" fill="#2D5FA8">REFACTOR</text>
+            <text x="95" y="134" fill="rgba(34, 38, 43, 0.55)">REPEAT</text>
+          </g>
+        </svg>
+        <figcaption>Fig. 2 — The cadence.</figcaption>
+      </figure>
+
+      <p class="step"><strong>Red:</strong> write a failing test.  Here the code is invariant — you might be
+      tempted to fix the code, but don't do that yet, no matter how obvious the fix!</p>
+
+      <p class="step"><strong>Green:</strong> now we make the test pass.  This is the fun part!  Note that now the
+      <em>test</em> is invariant: it might be tempting to change the test instead of the code
+      but you shouldn't.  That's the discipline of this axis.</p>
+
+      <p class="step"><strong>Refactor:</strong> think the last step was fun?  Now you get to improve the code's
+      structure, design and coherence!  In this axis we keep the tests as invariant
+      once again: they are the datum surface proving the code still functions as
+      it should.</p>
+
+      <p>This example reveals Axial Methodology's final property: <strong>invariants
+      make work <em>verifiable</em>.</strong>  "Did the refactoring break anything?"  That
+      question is unanswerable in a kitchen-chaos workflow where code and
+      tests churn together.  By holding the tests still, we can definitively
+      answer the question.  The invariant you refuse to mutate is the datum that
+      lets you verify the part you did change.</p>
+    </section>
+
+    <!-- ================= PAYOFF ================= -->
+    <section class="section">
+      <span class="anno section-eyebrow">Detail 5 / Agents</span>
+
+      <figure class="rp banner">
+        <span class="c tl"></span><span class="c tr"></span><span class="c bl"></span><span class="c br"></span>
+        <img src="images/welcome-to-vibeville-cropped.png"
+             alt="Satirical postcard reading Welcome to Vibeville: a jeep tears through a palm-lined street, windshield shattering, laptops and briefcases flying">
+        <figcaption class="rp-caption">Ref 5.1 — Vibeville · every axis moving at once</figcaption>
+      </figure>
+
+      <h2>Why this matters now</h2>
+
+      <p>Today we are handing off real work to AI agents.  The biggest problem with
+      this isn't capability — it's <em>legibility</em>.  An agent muddling every
+      axis at once produces the same kitchen-chaos we saw while baking cookies:
+      motion everywhere, and no way for an observer to reason about it.  The
+      human overseeing the work is left asking the worst kind of questions:
+      <em>What's going on right now?  What process is it even following?</em></p>
+
+      <p>But give your agents axes, and everything improves:</p>
+
+      <ul class="payoff-list">
+        <li><strong>Each axis has declared invariants,</strong> so the agent doing refactoring
+        does not touch tests.  The debugging agent does not commit their
+        experimental edits.  These aren't just vibes; they're constraints you
+        can enforce.</li>
+        <li><strong>The work becomes observable.</strong>  The human no longer has to ask <em>what
+        is this agent doing?</em>  They can see which axis is active, and ask more
+        targeted questions instead: <em>Is this a meaningful test?  Do I agree
+        with this debugging approach?</em></li>
+        <li><strong>The work becomes verifiable.</strong>  A narrow axis has narrow acceptable
+        outputs.  When checking an agent's work, we move from open-ended audits
+        to bounded questions: were the invariants respected, and did it produce
+        the required artifacts?</li>
+        <li><strong>Axes compound.</strong>  Artifacts from planning become invariants in the
+        coding axis, and a reference for testing and review besides.  The
+        structure itself — which axes, in what arrangement, with what handoffs
+        and invariants — these become the process, easily visible and discoverable.</li>
+      </ul>
+
+      <p>This isn't a new style of work devised just for agents.  It's the oldest
+      discipline in skilled work: the cook's mise en place, the woodworker's
+      clamp, the engineer's datum face and the developer's untouched test, now
+      re-expressed in a form that can be used to direct an agent.</p>
+
+      <p class="closing">Hold part of a system still so you can work with the rest of it.</p>
+    </section>
+
+    <!-- ================= CTA ================= -->
+    <section class="section">
+      <span class="anno section-eyebrow">Detail 6 / Put it to work</span>
+      <h2>Put it to work</h2>
+
+      <p>I'm building an open set of axis definitions for agentic software
+      development — skills, subagents, and hooks that give an agent axial
+      discipline out of the box.  <em>(Coming soon — watch
+      <a href="https://github.com/joelhelbling/axial-method">the repo</a>.)</em></p>
+
+      <p>If you're thinking about how your organization adopts agentic development
+      without losing the ability to understand the work — I'd love to talk!  This
+      is what we do at <a href="https://testdouble.com">Test Double</a>, the awesome
+      company where I work.</p>
+
+      <p><a href="https://github.com/joelhelbling">GitHub</a> ·
+      <a href="https://www.linkedin.com/in/joelhelbling">LinkedIn</a></p>
+    </section>
+
+    <!-- ================= BIO ================= -->
+    <section class="section">
+      <span class="anno section-eyebrow">Detail 7 / The Author</span>
+      <h2>About the author</h2>
+
+      <div class="bio-grid">
+        <figure class="rp bio">
+          <span class="c tl"></span><span class="c tr"></span><span class="c bl"></span><span class="c br"></span>
+          <img src="images/joel-helbling-portrait.png" style="--pos: 50% 40%"
+               alt="Black-and-white portrait of Joel Helbling, resting his chin on his hand">
+          <figcaption class="rp-caption">Ref 7.1 — Author</figcaption>
+        </figure>
+        <p><strong>Joel Helbling</strong> has been building software for over 30 years; from Pascal
+        and Perl, to Java, Ruby &amp; JavaScript.  Today he works as an Engagement Partner
+        at <a href="https://testdouble.com">Test Double</a>, where he helps teams solve today's
+        technology problems without losing control of the future.</p>
+      </div>
+    </section>
+
+    <!-- ================= TITLE BLOCK ================= -->
+    <footer class="title-block">
+      <div><span class="label">Title</span><span class="value">The Axial Method</span></div>
+      <div><span class="label">Scale</span><span class="value">1 : 1</span></div>
+      <div><span class="label">Drawn by</span><span class="value">J. Helbling</span></div>
+      <div><span class="label">Sheet</span><span class="value">1 of 1</span></div>
+    </footer>
+
+  </div>
+</body>
+</html>

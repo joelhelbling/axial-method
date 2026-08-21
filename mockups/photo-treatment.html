@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photo Treatments · The Axial Method</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Michroma&family=Public+Sans:ital,wght@0,300;0,400;0,600;1,300&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --vellum: #FBFAF5;
+    --sheet: rgba(251, 250, 245, 0.84);
+    --ink: #22262B;
+    --pencil-blue: #2D5FA8;
+    --pencil-blue-faint: rgba(45, 95, 168, 0.35);
+    --datum-red: #C2452D;
+    --grid-line: rgba(45, 95, 168, 0.07);
+    --grid-line-major: rgba(45, 95, 168, 0.13);
+    --tape: rgba(226, 219, 191, 0.8);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--vellum);
+    background-image:
+      linear-gradient(var(--grid-line-major) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line-major) 1px, transparent 1px),
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 96px 96px, 96px 96px, 12px 12px, 12px 12px;
+    color: var(--ink);
+    font-family: "Public Sans", sans-serif;
+    font-weight: 300;
+    font-size: 17.5px;
+    line-height: 1.7;
+  }
+
+  .sheet {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 56px;
+    background: var(--sheet);
+    border-left: 1px solid var(--pencil-blue-faint);
+    border-right: 1px solid var(--pencil-blue-faint);
+  }
+
+  h2 {
+    font-family: "Michroma", sans-serif;
+    font-weight: 400;
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin: 80px 0 40px;
+  }
+  h2:first-child { margin-top: 0; }
+  .note { max-width: 620px; margin-bottom: 40px; }
+
+  /* =========================================================
+     TREATMENT 1 — Taped print
+     white print border, slight rotation, tape at two corners
+     ========================================================= */
+  .print {
+    display: inline-block;
+    background: #fff;
+    padding: 12px 12px 14px;
+    box-shadow:
+      0 1px 2px rgba(34, 38, 43, 0.14),
+      0 6px 18px rgba(34, 38, 43, 0.16);
+    position: relative;
+  }
+  .print img { display: block; }
+
+  .rot-l { transform: rotate(-1.4deg); }
+  .rot-r { transform: rotate(1.1deg); }
+
+  .print .tape {
+    position: absolute;
+    width: 92px;
+    height: 26px;
+    background: var(--tape);
+    box-shadow: 0 1px 3px rgba(34, 38, 43, 0.12);
+    opacity: 0.9;
+  }
+  .tape.tl { top: -12px; left: -30px; transform: rotate(-42deg); }
+  .tape.br { bottom: -12px; right: -30px; transform: rotate(-42deg); }
+  .tape.tr { top: -12px; right: -30px; transform: rotate(42deg); }
+  .tape.bl { bottom: -12px; left: -30px; transform: rotate(42deg); }
+
+  .print-caption {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--pencil-blue);
+    margin-top: 10px;
+    text-align: left;
+  }
+
+  .pair {
+    display: flex;
+    gap: 44px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  /* preview-crop helper: portrait 4:5 */
+  .p45 { width: 300px; aspect-ratio: 4 / 5; object-fit: cover; }
+  /* landscape 3:2, full column */
+  .l32 { width: 640px; aspect-ratio: 3 / 2; object-fit: cover; }
+  /* small landscape */
+  .l32s { width: 420px; aspect-ratio: 3 / 2; object-fit: cover; }
+
+  /* =========================================================
+     TREATMENT 2 — Photo corners (album style)
+     ========================================================= */
+  .cornered {
+    display: inline-block;
+    position: relative;
+    background: #fff;
+    padding: 10px;
+    box-shadow: 0 4px 14px rgba(34, 38, 43, 0.13);
+  }
+  .cornered img { display: block; }
+  .corner {
+    position: absolute;
+    width: 0; height: 0;
+    border-style: solid;
+  }
+  .corner.tl { top: -2px; left: -2px; border-width: 26px 26px 0 0; border-color: #E8E2D2 transparent transparent transparent; }
+  .corner.tr { top: -2px; right: -2px; border-width: 0 26px 26px 0; border-color: transparent #E8E2D2 transparent transparent; }
+  .corner.bl { bottom: -2px; left: -2px; border-width: 26px 0 0 26px; border-color: transparent transparent transparent #E8E2D2; }
+  .corner.br { bottom: -2px; right: -2px; border-width: 0 0 26px 26px; border-color: transparent transparent #E8E2D2 transparent; }
+
+  /* pencil-blue pocket variant — smaller pockets */
+  .blue-pockets .corner.tl { border-top-color: var(--pencil-blue); border-width: 16px 16px 0 0; }
+  .blue-pockets .corner.tr { border-right-color: var(--pencil-blue); border-width: 0 16px 16px 0; }
+  .blue-pockets .corner.bl { border-left-color: var(--pencil-blue); border-width: 16px 0 0 16px; }
+  .blue-pockets .corner.br { border-bottom-color: var(--pencil-blue); border-width: 0 0 16px 16px; }
+
+  /* =========================================================
+     TREATMENT 3 — Drafting plate
+     flat, no rotation; blue hairline frame; caption bar like a
+     drawing detail; datum-red pin dots at corners
+     ========================================================= */
+  .plate {
+    display: inline-block;
+    background: #fff;
+    border: 1px solid var(--pencil-blue);
+    padding: 10px;
+    position: relative;
+    box-shadow: 0 3px 12px rgba(34, 38, 43, 0.10);
+  }
+  .plate img { display: block; }
+  .plate .pin {
+    position: absolute;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #E2694F, var(--datum-red) 65%);
+    box-shadow: 0 1px 2px rgba(34, 38, 43, 0.35);
+  }
+  .pin.tl { top: 5px; left: 5px; }
+  .pin.tr { top: 5px; right: 5px; }
+  .pin.bl { bottom: 33px; left: 5px; }
+  .pin.br { bottom: 33px; right: 5px; }
+  .plate-caption {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--pencil-blue);
+    border-top: 1px solid var(--pencil-blue-faint);
+    padding-top: 8px;
+    margin-top: 10px;
+  }
+</style>
+</head>
+<body>
+  <div class="sheet">
+
+    <h2>T4 · Registered print (chosen direction)</h2>
+    <p class="note">T2's corner pockets and squareness + T1's print border and
+    mono caption.  No rotation — the pockets register the print like datum
+    points register a part.  First pair: paper-beige pockets.  Second pair:
+    pencil-blue pockets.</p>
+
+    <div class="pair" style="margin-bottom: 56px;">
+      <figure class="cornered blue-pockets">
+        <span class="corner tl"></span><span class="corner tr"></span>
+        <span class="corner bl"></span><span class="corner br"></span>
+        <img class="p45" src="../images/pexels-tanner-barrott-506845-8456734.jpg" alt="Overhead view of cookie ingredients: butter, flour, brown sugar, chocolate chips, eggs">
+        <figcaption class="print-caption">Ref 2.1 — Mise en place</figcaption>
+      </figure>
+      <figure class="cornered blue-pockets">
+        <span class="corner tl"></span><span class="corner tr"></span>
+        <span class="corner bl"></span><span class="corner br"></span>
+        <img class="p45" src="../images/pexels-lauren-diaz-768597919-19130312.jpg" alt="Formed cookie dough on a parchment-lined baking sheet beside the mixing bowl">
+        <figcaption class="print-caption">Ref 2.2 — Prep complete</figcaption>
+      </figure>
+    </div>
+
+    <div class="pair">
+      <figure class="cornered">
+        <span class="corner tl"></span><span class="corner tr"></span>
+        <span class="corner bl"></span><span class="corner br"></span>
+        <img class="p45" src="../images/pexels-tanner-barrott-506845-8456734.jpg" alt="Overhead view of cookie ingredients: butter, flour, brown sugar, chocolate chips, eggs">
+        <figcaption class="print-caption">Ref 2.1 — Mise en place</figcaption>
+      </figure>
+      <figure class="cornered">
+        <span class="corner tl"></span><span class="corner tr"></span>
+        <span class="corner bl"></span><span class="corner br"></span>
+        <img class="p45" src="../images/pexels-lauren-diaz-768597919-19130312.jpg" alt="Formed cookie dough on a parchment-lined baking sheet beside the mixing bowl">
+        <figcaption class="print-caption">Ref 2.2 — Prep complete</figcaption>
+      </figure>
+    </div>
+
+    <h2>T1 · Taped print</h2>
+    <p class="note">White print border, slight rotation, drafting tape.  Captions
+    in mono beneath the print, inside the border — like a labeled photo
+    pinned to the drawing.</p>
+
+    <div class="pair">
+      <figure class="print rot-l">
+        <span class="tape tl"></span><span class="tape br"></span>
+        <img class="p45" src="../images/pexels-tanner-barrott-506845-8456734.jpg" alt="Overhead view of cookie ingredients: butter, flour, brown sugar, chocolate chips, eggs">
+        <figcaption class="print-caption">Ref 2.1 — Mise en place</figcaption>
+      </figure>
+      <figure class="print rot-r">
+        <span class="tape tr"></span><span class="tape bl"></span>
+        <img class="p45" src="../images/pexels-lauren-diaz-768597919-19130312.jpg" alt="Formed cookie dough on a parchment-lined baking sheet beside the mixing bowl">
+        <figcaption class="print-caption">Ref 2.2 — Prep complete</figcaption>
+      </figure>
+    </div>
+
+    <h2>T2 · Photo corners</h2>
+    <p class="note">Album-style corner pockets, no rotation.  Quieter, more
+    orderly — reads "archival" rather than "working wall."</p>
+
+    <figure class="cornered">
+      <span class="corner tl"></span><span class="corner tr"></span>
+      <span class="corner bl"></span><span class="corner br"></span>
+      <img class="l32s" src="../images/pexels-tima-miroshnichenko-6790029.jpg" alt="Woodworker ripping a board on a table saw against the fence">
+    </figure>
+
+    <h2>T3 · Drafting plate</h2>
+    <p class="note">Flat and square — a photographic "detail plate" in the
+    drawing itself.  Blue hairline frame, red pin dots, captioned like a
+    figure.  The least skeuomorphic of the three; most faithful to the
+    existing design system.</p>
+
+    <figure class="plate">
+      <span class="pin tl"></span><span class="pin tr"></span>
+      <span class="pin bl"></span><span class="pin br"></span>
+      <img class="l32s" src="../images/pexels-cottonbro-5089144.jpg" alt="Woodworker flattening a board face on a jointer" style="width:420px; aspect-ratio: 3/2; object-fit: cover;">
+      <figcaption class="plate-caption">Plate 3.1 — Face jointing · Datum A established</figcaption>
+    </figure>
+
+  </div>
+</body>
+</html>

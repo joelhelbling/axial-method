@@ -14,7 +14,7 @@ Difficult problems get simpler when we stop trying to change everything
 all at once. **The Axial Method** is a way of working, an old, familiar,
 and proven approach: at every stage, choose what _won't_ change, and what
 will.  This works with all kinds of problems, from baking cookies to
-building a house.  Saavy builders have used it for millennia, and now
+building a house.  Savvy builders have used it for millennia, and now
 it has new relevance for AI agents.
 
 ---
@@ -50,10 +50,10 @@ look at some common examples.
 
 ### 1. The kitchen
 
-It's Saturday afternoon, and you've decided it's time to baking cookies.
+It's Saturday afternoon, and you've decided it's time to bake some cookies.
 The kitchen is a mess since last night, so you're loading the dishwasher
 between steps.  Halfway into mixing the dry ingredients, you discover
-you're out of brown sugar.  Now youre at the grocery store, leaving the
+you're out of brown sugar.  Now you're at the grocery store, leaving the
 butter softening on a cluttered counter.  Back at home, the recipe says
 "blend the wet ingredients" but you've already cracked the eggs into the
 flour while the mixer runs.
@@ -76,12 +76,12 @@ be to knock off as many tasks as quickly as possible, success depends on
 the discipline of respecting the invariants in each axis.
 
 The kitchen is full of axes: prepping, cooking, plating, cleaning...and
-mise enpace is the discipline for just one of them.  How the axes _fit
+mise en place is the discipline for just one of them.  How the axes _fit
 together_ is its own craft.  To demonstrate that, let's go to the workshop.
 
 ---
 
-## [Example 2 -- The workshop: axes in sequence]
+## [Example 2 — The workshop: axes in sequence]
 
 ### 2. The workshop
 
@@ -98,9 +98,9 @@ sequence:
 **Flatten one face.** Just one.  Ignore all other surfaces.  If it wobbles,
 shim it so it's stable, then work until that one face is perfectly flat.
 
-**Square one edge** — a clean straight code, as square as possible.  The
+**Square one edge** — a clean straight cut, as square as possible.  The
 flattened face in the previous step is now a *reference surface* that
-allows the board to light flat so we can get a clean cut on the edge.
+allows the board to lie flat so we can get a clean cut on the edge.
 
 **Bring the board to thickness** — riding the flat face across the
 planer bed.
@@ -109,7 +109,7 @@ planer bed.
 
 Note how **the output of each axis became an invariant _and also a
 reference_ for the next.**  The first flat face isn't just a completed
-step, it's also the fixed reference that makes the next operatoin
+step, it's also the fixed reference that makes the next operation
 possible.  Engineers have notation for this: on a technical drawing, the
 invariant surface is marked as a _datum_, and every measurement is taken
 from that datum.
@@ -185,10 +185,10 @@ But give your agents axes, and everything improves:
   outputs.  When checking an agent's work, we move from open-ended audits
   to bounded questions: were the invariants respected, and did it produce
   the required artifacts?
-- **Axes compound.**  Artifacts from planning becomes invariants in the
+- **Axes compound.**  Artifacts from planning become invariants in the
   coding axis, and a reference for testing and review besides.  The
-  structure itself --which axes, in what arrangement, with what handoffs
-  and invariants-- these become the process, easily visible and discoverable.
+  structure itself — which axes, in what arrangement, with what handoffs
+  and invariants — these become the process, easily visible and discoverable.
 
 This isn't a new style of work devised just for agents.  It's the oldest
 discipline in skilled work: the cook's mise en place, the woodworker's
@@ -205,7 +205,7 @@ re-expressed in a form that can be used to direct an agent.
 
 I'm building an open set of axis definitions for agentic software
 development — skills, subagents, and hooks that give an agent axial
-discipline out of the box. *(Coming soon — watch [the repo](https://github.com/joelhelbling/axial-method).)
+discipline out of the box. *(Coming soon — watch [the repo](https://github.com/joelhelbling/axial-method).)*
 
 If you're thinking about how your organization adopts agentic development
 without losing the ability to understand the work — I'd love to talk!  This
