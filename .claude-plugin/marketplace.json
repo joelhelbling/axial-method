@@ -1,0 +1,14 @@
+{
+  "name": "axial-method",
+  "owner": {
+    "name": "Joel Helbling",
+    "email": "joel.helbling@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "axial",
+      "source": "./plugins/axial",
+      "description": "Axial discipline for agentic software development: work one axis at a time, each defined by its goal, its invariants, and its required artifacts.  Includes the core method plus an issue-through-PR sequence of axes (red, green, refactor, pull-request)."
+    }
+  ]
+}

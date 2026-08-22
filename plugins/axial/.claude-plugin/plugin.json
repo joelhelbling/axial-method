@@ -1,0 +1,12 @@
+{
+  "name": "axial",
+  "version": "0.1.0",
+  "description": "Work axially: hold part of the system still so you can work with the rest of it.  A core skill defining the Axial Method, plus axis skills for an issue-through-PR development sequence: red, green, refactor, pull-request.",
+  "author": {
+    "name": "Joel Helbling"
+  },
+  "homepage": "https://joelhelbling.github.io/axial-method/",
+  "repository": "https://github.com/joelhelbling/axial-method",
+  "license": "MIT",
+  "keywords": ["axial", "tdd", "workflow", "invariants", "agentic-development"]
+}
