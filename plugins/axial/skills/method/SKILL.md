@@ -56,20 +56,25 @@ through to a submitted pull request:
 
 | Axis | Skill | Produces |
 |---|---|---|
-| Red | `axial:red` | a failing test capturing the next requirement |
+| Red | `axial:red` | a failing test (or a small batch) capturing the next requirement(s) |
 | Green | `axial:green` | passing code, committed |
 | Refactor | `axial:refactor` | improved code, tests green, committed |
 | Pull-request | `axial:pull-request` | a submitted PR referencing the issue |
 
-Red, green and refactor loop once per requirement.  When the issue is
-fully covered, proceed to pull-request.  Read each axis skill when you
-enter it, not before; each carries its own contract and guidance.
+Red, green and refactor loop once per requirement — or once per small
+batch of requirements, when red judges the interface settled enough
+to batch.  The loop presumes a single shared working tree: red hands
+its tests forward staged, not committed, and green commits each
+red-green pairing together.  When the issue is fully covered, proceed
+to pull-request.  Read each axis skill when you enter it, not before;
+each carries its own contract and guidance.
 
 ## Adopting, extending, and writing axes
 
 Users may take a predefined sequence as-is, mix in additional axes
-(planning, review, debugging, triage, retrospecting — a matter of
-taste and project constraints), or write their own.
+(planning, review, debugging, triage, retrospecting, or a small-fix
+axis for mechanical glitches noticed out of axis — a matter of taste
+and project constraints), or write their own.
 
 A new axis is a skill that opens with the standard contract (Requires,
 Invariants, Produces) followed by whatever expanded guidance the axis
