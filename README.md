@@ -15,6 +15,8 @@ images/             Canonical source images, including hand-tuned crops
 bin/make-images.sh  Regenerates assets/ from images/ (resize + compress)
 docs/               The thinking behind the site
 mockups/            Design exploration artifacts
+plugins/            The method as working Claude Code skills
+.claude-plugin/     Marketplace manifest for the plugins
 ```
 
 The site is plain HTML and CSS in a single file.  Fonts (Michroma,
@@ -40,6 +42,18 @@ Images follow a two-layer scheme:
 - `docs/design-direction.md` -- the chosen design system: tokens, type,
   and signature elements
 - `docs/voice.md` -- style notes for keeping the copy in Joel's voice
+
+## The plugin
+
+This repo is also a Claude Code plugin marketplace.  The `axial`
+plugin in `plugins/axial/` delivers the method as skills: the core
+method itself, plus red, green, refactor and pull-request axes
+forming an issue-through-PR sequence.  To try it in Claude Code:
+
+```
+/plugin marketplace add joelhelbling/axial-method
+/plugin install axial@axial-method
+```
 
 ## Deploying
 
