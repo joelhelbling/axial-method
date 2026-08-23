@@ -1,6 +1,6 @@
 ---
 name: green
-description: The green axis of the Axial Method — make the failing test pass without changing any test.  Use this skill whenever there is a failing test to satisfy, whenever the user says to make the test pass, go green, or implement against the red test, and whenever the red axis has just handed forward a failing test in the axial issue-through-PR sequence.
+description: The green axis of the Axial Method — make the failing tests pass, one at a time, without changing any test.  Use this skill whenever there is a failing test to satisfy, whenever the user says to make the test pass, go green, or implement against the red test, and whenever the red axis has just handed forward failing tests in the axial issue-through-PR sequence.
 ---
 
 # The Green Axis
@@ -8,33 +8,45 @@ description: The green axis of the Axial Method — make the failing test pass w
 ## Contract
 
 **Requires**
-- the failing test and its failure output (from red)
+- the failing test or batch, staged, with its failure output (from red)
 - the issue being worked
 - notes handed forward from red
 
 **Invariants**
-- all tests — the new failing one and the existing suite alike; a test
-  that now looks wrong is reported and corrected via a fresh red step,
-  never edited here
-- the scope of the requirement — implement what the test demands, not
+- every test — target tests are satisfied, never edited, and no other
+  test may fail.  A test that now looks wrong-shaped goes back to red
+  for revision; it is not adjusted here
+- the scope of the requirement — implement what the tests demand, not
   features you can foresee
 
 **Produces**
-- production code making the target test pass
-- evidence of green: a full suite run with everything passing
+- production code making the target tests pass
+- evidence of green: a full suite run with nothing failing
   (→ datum for refactor)
-- a commit recording the red-green pair
+- commits recording the red-green work — one per test where the
+  changes separate cleanly, one for the batch otherwise
 - notes for refactor (the ugliness tolerated to get here)
 
 ## Goal
 
-Make the failing test handed forward from red pass, while keeping
-every other test passing.
+Make the failing tests handed forward from red pass, one at a time,
+without any other test failing.
 
 ## Instructions
 
-Announce entry: name the axis, the test being satisfied, and the
+Announce entry: name the axis, the test(s) being satisfied, and the
 invariants.
+
+Work one test at a time.  Before implementing against a test, run it
+and confirm it still fails for the right reason; earlier work in the
+batch may have changed the ground under it.  If it now looks
+wrong-shaped, return it to red for revision — with a batch this is
+occasionally expected, not exceptional.
+
+The working rule is _change the error or make it pass_: each run of
+the target test should either go green or fail with a different, more
+advanced error than the last.  A failure to compile is just another
+kind of red; keep changing the error until the test passes.
 
 Write the simplest implementation that honestly satisfies the test.
 Defer generality the tests don't yet demand, but don't game the
@@ -45,12 +57,18 @@ Ugly is acceptable; separating "make it work" from "make it good" is
 why green and refactor are distinct axes.  Note the ugliness you leave
 behind and hand it forward.
 
-If the new code breaks an existing test, that test is equally
-invariant: adjust the implementation until the whole suite is green.
+If the new code makes another test fail, that test is equally binding:
+adjust the implementation until nothing fails.
+
+Commit as each test passes when the changes separate cleanly; commit
+the batch as a whole when they don't.  Either way, write messages in
+the repository's style describing the behavior added, and land the
+tests red staged together with the code that satisfies them.
 
 ## Exit
 
-Verify invariants: no test files changed.  Run the full suite; confirm
-all green.  Commit in the repository's style, describing the behavior
-added.  Announce the handoff — the green suite is the datum for the
-refactor axis — and invoke `axial:refactor`.
+Verify invariants: the only test changes in this loop's commits are
+the ones red staged, and the unstaged diff, throughout, held
+production code only.  Run the full suite; confirm nothing fails.
+Announce the handoff — the green suite is the datum for the refactor
+axis — and invoke `axial:refactor`.
