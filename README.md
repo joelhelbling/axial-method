@@ -17,6 +17,7 @@ docs/               The thinking behind the site
 mockups/            Design exploration artifacts
 plugins/            The method as working Claude Code skills
 .claude-plugin/     Marketplace manifest for the plugins
+evals/              Sandbox scenarios for evaluating the skills
 ```
 
 The site is plain HTML and CSS in a single file.  Fonts (Michroma,
