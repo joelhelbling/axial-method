@@ -55,6 +55,18 @@
     color: var(--pencil-blue);
   }
 
+  pre.install {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--pencil-blue);
+    border: 1px solid var(--pencil-blue-faint);
+    padding: 14px 18px;
+    max-width: 620px;
+    margin-bottom: 26px;
+    overflow-x: auto;
+  }
+
   strong { font-weight: 600; }
   a { color: var(--pencil-blue); text-decoration-thickness: 1px; text-underline-offset: 3px; }
   a:hover { color: var(--datum-red); }
@@ -760,10 +772,21 @@
       <span class="anno section-eyebrow">Detail 6 / Put it to work</span>
       <h2>Put it to work</h2>
 
-      <p>I'm building an open set of axis definitions for agentic software
-      development — skills, subagents, and hooks that give an agent axial
-      discipline out of the box.  <em>(Coming soon — watch
-      <a href="https://github.com/joelhelbling/axial-method">the repo</a>.)</em></p>
+      <p>There's a working example you can try today.
+      <a href="https://github.com/joelhelbling/axial-method">The repo</a> is a
+      Claude Code plugin that expresses the classic red-green-refactor sequence
+      as a set of axis skills: red, green, refactor, and pull-request, each with
+      its contract of invariants and handoffs, plus a method skill that defines
+      the scheme they all follow.  In Claude Code:</p>
+
+      <pre class="install"><code>/plugin marketplace add joelhelbling/axial-method
+/plugin install axial@axial-method</code></pre>
+
+      <p>Think of it as a reference set rather than the one true sequence.  The
+      real invitation is in the method skill itself, which describes how to
+      define an axis: what it requires, what it holds still, what it produces.
+      Your team's axes will likely look different from mine, and that's the
+      idea.  Build the sequence that fits the way you work.</p>
 
       <p>If you're thinking about how your organization adopts agentic development
       without losing the ability to understand the work — I'd love to talk!  This
