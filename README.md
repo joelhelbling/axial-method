@@ -55,6 +55,15 @@ forming an issue-through-PR sequence.  To try it in Claude Code:
 /plugin install axial@axial-method
 ```
 
+One default worth knowing about: the axes hand notes forward between
+them, and the method skill keeps those notes in an AXIAL-NOTES.md at
+the repository root, excluded from version control.  That's a decision
+your team might make differently.  Some would rather the notes land
+as comments in a kanban tool like Linear or Trello, some want them
+committed, and some have their own local scheme.  If so, edit the
+notes paragraph in the method skill, or override it with instructions
+of your own (CLAUDE.md is a natural place).
+
 ## Deploying
 
 GitHub Pages serves the `main` branch root.  Pushing to `main` deploys.
