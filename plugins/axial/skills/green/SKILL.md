@@ -39,9 +39,18 @@ invariants.
 
 Work one test at a time.  Before implementing against a test, run it
 and confirm it still fails for the right reason; earlier work in the
-batch may have changed the ground under it.  If it now looks
-wrong-shaped, return it to red for revision — with a batch this is
-occasionally expected, not exceptional.
+batch may have changed the ground under it.  A target test counts as
+satisfied only if it was seen to fail and then made to pass.  One
+that has started passing incidentally proves nothing about its
+requirement; treat it as suspect — it is usually either wrong-shaped
+or evidence that an earlier implementation overreached.
+
+If a test now looks wrong-shaped, return it to red for revision —
+with a batch this is occasionally expected, not exceptional.  When a
+returned test shares its file with satisfied ones, don't commit the
+partial batch: leave the production changes in the working tree and
+red's staging intact, note which tests were satisfied, and let the
+commits land after red's revision and the next green pass.
 
 The working rule is _change the error or make it pass_: each run of
 the target test should either go green or fail with a different, more
@@ -72,3 +81,8 @@ the ones red staged, and the unstaged diff, throughout, held
 production code only.  Run the full suite; confirm nothing fails.
 Announce the handoff — the green suite is the datum for the refactor
 axis — and invoke `axial:refactor`.
+
+If a test went back to red, make that transition instead: announce
+the return, hand back the batch state and your notes, and invoke
+`axial:red`.  The refactor handoff waits for a loop that ends fully
+satisfied.

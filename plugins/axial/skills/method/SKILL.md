@@ -47,6 +47,14 @@ When working axially:
 4. **Announce the transition**: name the next axis and the artifacts
    being handed forward.
 
+Notes are artifacts like any other; several contracts require them.
+Unless the project directs otherwise, keep them in a single
+AXIAL-NOTES.md at the repository root (a name unlikely to collide
+with a file the project already has), excluded from version control
+(`.git/info/exclude` keeps it out without touching the project's
+.gitignore), so they survive axis transitions — and changes of agent —
+without landing in the pull request.
+
 ## Sequences
 
 A sequence is a set of axes whose contracts interlock: each axis's
