@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Public+Sans:ital,wght@0,300;0,400;0,600;1,300;1,400&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<script defer src="https://umami.hshp.cc/script.js" data-website-id="00bd6fbb-bd36-4e67-97fa-37efe6f65407"></script>
 <style>
   :root {
     --vellum: #FBFAF5;
@@ -773,7 +774,7 @@
       <h2>Put it to work</h2>
 
       <p>There's a working example you can try today.
-      <a href="https://github.com/joelhelbling/axial-method">The repo</a> is a
+      <a href="https://github.com/joelhelbling/axial-method" data-umami-event="click-repo">The repo</a> is a
       Claude Code plugin that expresses the classic red-green-refactor sequence
       as a set of axis skills: red, green, refactor, and pull-request, each with
       its contract of invariants and handoffs, plus a method skill that defines
@@ -790,11 +791,11 @@
 
       <p>If you're thinking about how your organization adopts agentic development
       without losing the ability to understand the work — I'd love to talk!  This
-      is what we do at <a href="https://testdouble.com">Test Double</a>, the awesome
+      is what we do at <a href="https://testdouble.com" data-umami-event="click-testdouble-cta">Test Double</a>, the awesome
       company where I work.</p>
 
-      <p><a href="https://github.com/joelhelbling">GitHub</a> ·
-      <a href="https://www.linkedin.com/in/joelhelbling">LinkedIn</a></p>
+      <p><a href="https://github.com/joelhelbling" data-umami-event="click-github-profile">GitHub</a> ·
+      <a href="https://www.linkedin.com/in/joelhelbling" data-umami-event="click-linkedin">LinkedIn</a></p>
     </section>
 
     <!-- ================= BIO ================= -->
@@ -811,7 +812,7 @@
         </figure>
         <p><strong>Joel Helbling</strong> has been building software for over 30 years; from Pascal
         and Perl, to Java, Ruby &amp; JavaScript.  Today he works as an Engagement Partner
-        at <a href="https://testdouble.com">Test Double</a>, where he helps teams solve today's
+        at <a href="https://testdouble.com" data-umami-event="click-testdouble-bio">Test Double</a>, where he helps teams solve today's
         technology problems without losing control of the future.</p>
       </div>
     </section>
@@ -825,5 +826,28 @@
     </footer>
 
   </div>
+
+<script>
+  // Scroll-depth tracking: fires one Umami event per threshold per pageview.
+  (function () {
+    var thresholds = [25, 50, 75, 100];
+    var fired = {};
+    function check() {
+      var doc = document.documentElement;
+      var scrollable = doc.scrollHeight - window.innerHeight;
+      var percent = scrollable > 0
+        ? Math.round(((window.scrollY || doc.scrollTop) / scrollable) * 100)
+        : 100;
+      thresholds.forEach(function (t) {
+        if (percent >= t && !fired[t] && window.umami) {
+          fired[t] = true;
+          window.umami.track('scroll-depth', { percent: t });
+        }
+      });
+    }
+    window.addEventListener('scroll', check, { passive: true });
+    window.addEventListener('load', check);
+  })();
+</script>
 </body>
 </html>
