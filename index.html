@@ -841,7 +841,7 @@
       thresholds.forEach(function (t) {
         if (percent >= t && !fired[t] && window.umami) {
           fired[t] = true;
-          window.umami.track('scroll-depth', { percent: t });
+          window.umami.track('scroll-depth-' + t);
         }
       });
     }
